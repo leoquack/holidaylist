@@ -51,4 +51,4 @@ func easterDays(diff int) holidaylist.Calculate {
 }
 ```
 
-For more examples see the [examples](https://github.com/anheric/holidaylist/examples) folder
+For more examples see the [examples](https://github.com/anheric/holidaylist/tree/master/examples) folder
