@@ -2,56 +2,53 @@
 
 A very simple holiday helper
 
-## Getting Started
-
 ```
 go get github.com/anheric/holidaylist
 ```
 
-### Usage
+Documentation: [godoc](https://godoc.org/github.com/anheric/holidaylist)
 
-```
-t := time.Now()
-year := t.Year()
-location := t.Location()
+### Simple usage
 
-// create a new holiday list
-list := holidaylist.New(location)
-
+```go
+list := holidaylist.New(time.Local)
 // add holidays
-list.Define(
-	holidaylist.Holiday{
-		Name: "New year's day",
-		Date: time.Date(year, time.January, 1, 0, 0, 0, 0, location),
-	},
-	holidaylist.Holiday{
-		Name: "Good Friday",
-		Date: holidaylist.GetEaster(year, location).AddDate(0, 0, -2),
-	},
-	holidaylist.Holiday{
-		Name: "Easter Sunday",
-		Date: holidaylist.GetEaster(year, location),
-	},
-	holidaylist.Holiday{
-		Name: "Christmas Day",
-		Date: time.Date(year, time.December, 25, 0, 0, 0, 0, location),
-	},
+list.Add(
+	list.New("New year's day").Date(time.January, 1),
+	list.New("Easter Sunday").Func(easterDays(0)),
+	list.New("Easter Monday").Func(easterDays(1)),
+	list.New("Christmas Day").Date(time.December, 25),
 )
-
-// get all holidays by year
-byYear := list.GetYear(year)
-fmt.Printf("By year:\n%+v\n\n", byYear)
+// get List of holidays this year
+yearList, err := list.YearList(time.Now().Year())
+if err != nil {
+	// handle error
+}
+fmt.Printf("%+v\n\n", yearList)
 
 // check if day is holiday
-isHoliday, _ := list.IsHoliday(time.Date(year, time.December, 26, 0, 0, 0, 0, location))
+isHoliday, err := yearList.IsHoliday(time.Date(year, time.December, 26, 0, 0, 0, 0, location))
+if err != nil {
+	// handle error
+}
 if isHoliday {
 	// your code
 }
 
 // find holidays in date range
-res := list.FindHolidays(time.Date(year, time.December, 1, 0, 0, 0, 0, location), time.Date(year, time.December, 30, 0, 0, 0, 0, location))
+res := yearList.FindHolidays(time.Date(year, time.December, 1, 0, 0, 0, 0, location), time.Date(year, time.December, 30, 0, 0, 0, 0, location))
 for _, h := range res {
-	fmt.Printf("%+v IS HOLIDAY \n", h.Date.Format("Mon Jan _2"))
+	fmt.Printf("%+v IS HOLIDAY \n", h.Time.Format("Mon Jan _2"))
 }
-
 ```
+
+```go
+// implementation of holidaylist.Calculate for easter days calculation
+func easterDays(diff int) holidaylist.Calculate {
+	return func(year int, location *time.Location) time.Time {
+		return holidaylist.GetOrthodoxEaster(year, location).AddDate(0, 0, diff)
+	}
+}
+```
+
+For more examples see the [examples](https://github.com/anheric/holidaylist/examples) folder
