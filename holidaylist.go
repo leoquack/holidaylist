@@ -21,7 +21,7 @@ type Holiday struct {
 // Calculate helps calculate a variable holiday
 type Calculate func(year int, location *time.Location) time.Time
 
-// Definitions holds the list of holidays
+// Definitions hold the holiday definitions
 type Definitions struct {
 	Location *time.Location
 	Holidays []Holiday
@@ -37,24 +37,24 @@ type easterSunday struct {
 
 var easterCache = make(map[int]easterSunday, 0)
 
-// New returns an empty holidays List
+// New returns an empty holiday definitions
 func New(location *time.Location) *Definitions {
 	return &Definitions{
 		Location: location,
 	}
 }
 
-// Add inserts Holiday(s) into the List
-func (d *Definitions) Add(h ...*Holiday) {
-	for _, p := range h {
-		d.Holidays = append(d.Holidays, *p)
+// NewHoliday creates and returns a new Holiday
+func NewHoliday(name string) *Holiday {
+	return &Holiday{
+		Name: name,
 	}
 }
 
-// New creates and returns a new Holiday
-func (d *Definitions) New(name string) *Holiday {
-	return &Holiday{
-		Name: name,
+// Add appends into Holiday definitions
+func (d *Definitions) Add(h ...*Holiday) {
+	for _, p := range h {
+		d.Holidays = append(d.Holidays, *p)
 	}
 }
 

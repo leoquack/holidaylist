@@ -19,17 +19,17 @@ func main() {
 	list := holidaylist.New(location)
 	// add holidays
 	list.Add(
-		list.New("New year's day").Date(time.January, 1),
-		list.New("Epiphany").Date(time.January, 6),
-		list.New("Green Monday").Func(easterDays(-48)),
-		list.New("Good Friday").Func(easterDays(-2)),
-		list.New("Holy Saturday").Func(easterDays(-1)),
-		list.New("Easter Sunday").Func(easterDays(0)),
-		list.New("Easter Monday").Func(easterDays(1)),
-		list.New("Whit Monday").Func(easterDays(50)),
-		list.New("Assumption Day").Date(time.August, 15),
-		list.New("Christmas Day").Date(time.December, 25),
-		list.New("Boxing Day").Date(time.December, 26),
+		holidaylist.NewHoliday("New year's day").Date(time.January, 1),
+		holidaylist.NewHoliday("Epiphany").Date(time.January, 6),
+		holidaylist.NewHoliday("Green Monday").Func(easterDays(-48)),
+		holidaylist.NewHoliday("Good Friday").Func(easterDays(-2)),
+		holidaylist.NewHoliday("Holy Saturday").Func(easterDays(-1)),
+		holidaylist.NewHoliday("Easter Sunday").Func(easterDays(0)),
+		holidaylist.NewHoliday("Easter Monday").Func(easterDays(1)),
+		holidaylist.NewHoliday("Whit Monday").Func(easterDays(50)),
+		holidaylist.NewHoliday("Assumption Day").Date(time.August, 15),
+		holidaylist.NewHoliday("Christmas Day").Date(time.December, 25),
+		holidaylist.NewHoliday("Boxing Day").Date(time.December, 26),
 	)
 
 	year := time.Now().Year()
