@@ -14,10 +14,10 @@ Documentation: [godoc](https://godoc.org/github.com/anheric/holidaylist)
 list := holidaylist.New(time.Local)
 // add holidays
 list.Add(
-	list.New("New year's day").Date(time.January, 1),
-	list.New("Easter Sunday").Func(easterDays(0)),
-	list.New("Easter Monday").Func(easterDays(1)),
-	list.New("Christmas Day").Date(time.December, 25),
+	holidaylist.NewHoliday("New year's day").Date(time.January, 1),
+	holidaylist.NewHoliday("Easter Sunday").Func(easterDays(0)),
+	holidaylist.NewHoliday("Easter Monday").Func(easterDays(1)),
+	holidaylist.NewHoliday("Christmas Day").Date(time.December, 25),
 )
 // get List of holidays this year
 yearList, err := list.YearList(time.Now().Year())
