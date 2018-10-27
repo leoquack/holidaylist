@@ -2,7 +2,6 @@ package holidaylist
 
 import (
 	"errors"
-	"fmt"
 	"math"
 	"time"
 )
@@ -87,7 +86,6 @@ func (d *Definitions) RangeList(from, to time.Time) (*List, error) {
 	}
 
 	for i, r := 0, toYear-fromYear+1; i < r; i++ {
-		fmt.Println(fromYear + i)
 		for _, h := range d.Holidays {
 			h.calcTime(fromYear+i, yl.Location)
 			if (h.Time.After(from) && h.Time.Before(to)) || h.Time.Equal(from) || h.Time.Equal(to) {
