@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/anheric/holidaylist"
+	"github.com/leoquack/holidaylist"
 )
 
 func easterDays(diff int) holidaylist.Calculate {
