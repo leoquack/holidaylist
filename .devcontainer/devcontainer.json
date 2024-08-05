@@ -1,0 +1,28 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/go
+{
+	"name": "Go",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"IMAGE": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm"
+		}
+	},
+	"runArgs": [
+		"--name",
+		"leoquack_go-holidaylist"
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"EditorConfig.EditorConfig",
+				"eamodio.gitlens",
+				"tombonnike.vscode-status-bar-format-toggle",
+				"streetsidesoftware.code-spell-checker",
+				"wmaurer.change-case",
+				"albymor.increment-selection",
+				"golang.Go"
+			]
+		}
+	}
+}
