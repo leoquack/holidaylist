@@ -45,7 +45,7 @@ for _, h := range res {
 ```
 
 ```go
-// implementation of holidaylist.Calculate for easter days calculation
+// Implementation of holidaylist.Calculate for easter days calculation.
 func easterDays(diff int) holidaylist.Calculate {
 	return func(year int, location *time.Location) time.Time {
 		return holidaylist.GetOrthodoxEaster(year, location).AddDate(0, 0, diff)
