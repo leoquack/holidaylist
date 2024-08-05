@@ -12,33 +12,35 @@ Documentation: [godoc](https://godoc.org/github.com/leoquack/holidaylist)
 
 ```go
 list := holidaylist.New(time.Local)
-// add holidays
+
+// Add holidays.
 list.Add(
 	holidaylist.NewHoliday("New year's day").Date(time.January, 1),
 	holidaylist.NewHoliday("Easter Sunday").Func(easterDays(0)),
 	holidaylist.NewHoliday("Easter Monday").Func(easterDays(1)),
 	holidaylist.NewHoliday("Christmas Day").Date(time.December, 25),
 )
-// get List of holidays this year
+
+// Get List of holidays this year.
 yearList, err := list.YearList(time.Now().Year())
 if err != nil {
-	// handle error
+	// Handle error.
 }
 fmt.Printf("%+v\n\n", yearList)
 
-// check if day is holiday
-isHoliday, err := yearList.IsHoliday(time.Date(year, time.December, 26, 0, 0, 0, 0, location))
-if err != nil {
-	// handle error
-}
+// Check if day is holiday.
+checkDay := time.Date(year, time.December, 26, 0, 0, 0, 0, location)
+isHoliday, _ := yearList.IsHoliday(checkDay)
 if isHoliday {
-	// your code
+	fmt.Printf("Date '%s' is a holiday\n\n", checkDay.Format("_2 Jan 2006"))
 }
 
-// find holidays in date range
-res := yearList.FindHolidays(time.Date(year, time.December, 1, 0, 0, 0, 0, location), time.Date(year, time.December, 30, 0, 0, 0, 0, location))
+// Get all holidays in date range.
+from := time.Date(year, time.December, 1, 0, 0, 0, 0, location)
+to := time.Date(year, time.December, 30, 0, 0, 0, 0, location)
+res := yearList.FindHolidays(from, to)
 for _, h := range res {
-	fmt.Printf("%+v IS HOLIDAY \n", h.Time.Format("Mon Jan _2"))
+	fmt.Printf("%+v IS HOLIDAY \n", h.Time.Format("_2 Jan 2006"))
 }
 ```
 
