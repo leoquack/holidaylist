@@ -3,10 +3,10 @@
 A very simple holiday helper
 
 ```
-go get github.com/anheric/holidaylist
+go get github.com/leoquack/holidaylist
 ```
 
-Documentation: [godoc](https://godoc.org/github.com/anheric/holidaylist)
+Documentation: [godoc](https://godoc.org/github.com/leoquack/holidaylist)
 
 ### Simple usage
 
